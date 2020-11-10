@@ -75,17 +75,14 @@ def timerCallBack(event):
         msg.linear.x = control1
         state = 'state1'
         
-    '''    
+        
     if state == 'state1':
         yaw = getAngle(odom)
-        msg.angular.z = 0.5
         scan_len = len(scan.ranges)
         print ("scan len")
         print (scan_len)
         if scan_len > 0:
-            msg.angular.z = 0.5
             point = min(scan.ranges[scan_len-10 : scan_len+10])
-            msg.angular.z = 0
             print ("point")
             print (point)
             print (scan.ranges[scan_len-10])
@@ -112,13 +109,14 @@ def timerCallBack(event):
         msg.angular.z = control2
         
         state = 'state2'
-                    
-    if state == 'state2':
+    '''                
+    if state == 'state1':
         setpoint3 = 0.5
     
         scan_len = len(scan.ranges)
         if scan_len > 0:
             read = min(scan.ranges[scan_len-10 : scan_len+10])
+            print (read)
 
             error3 = -(setpoint3 - read)
         
