@@ -82,7 +82,9 @@ def timerCallBack(event):
         print ("scan len")
         print (scan_len)
         if scan_len > 0:
+            msg.angular.z = 0.5
             point = min(scan.ranges[scan_len-10 : scan_len+10])
+            msg.angular.z = 0
             print ("point")
             print (point)
             print (scan.ranges[scan_len-10])
