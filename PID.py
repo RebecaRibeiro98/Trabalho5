@@ -6,15 +6,15 @@ import tf
 import math
 
 
-kp1 = 1
+#kp1 = 1
 kp2 = 0.01
 kp3 = 1
 
-ki1 = 1
+#ki1 = 1
 ki2 = 0.0001
 ki3 = 0.01
 
-kd1 = 1
+#kd1 = 1
 kd2 = 0.01
 kd3 = 1
 
@@ -48,8 +48,8 @@ def timerCallBack(event):
     I1=0
     I2=0
     I3=0
-    erro2=0
-    erro3=0
+    erro2=0 #erro antigo
+    erro3=0 #erro antigo
     state = 'state1'
     msg = Twist()
     
@@ -86,19 +86,18 @@ def timerCallBack(event):
         for x in scan.ranges:
             if ( x != min(scan.ranges)):
                 msg.angular.z = 1
+                
             else:
-                state = 'state2'
                 msg.angular.z = 0
-        
+                state = 'state2'
         
     if  (state == 'state2'): 
         
         point =  min(scan.ranges)
-        print ("point")
-        print (point)
-        #interpolando
+        
+        #interpolando pra converter o ponto em angulo 
         setpoint2 = (200*((point - scan.ranges[0])/(scan.ranges[scan_len-1] - scan.ranges[0]))) - 100
-        print (setpoint2)
+        
         error2 = (setpoint2 - yaw)
     
         if abs(error2) > 180:
@@ -113,12 +112,12 @@ def timerCallBack(event):
         erro2 = error2 
             
                     
-        #else:
-            #control2 = 0
+        else:
+            control2 = 0
         
-    msg.angular.z = control2
+        msg.angular.z = control2
         
-    state = 'state3'   
+        state = 'state3'   
                     
     if state == 'state3':
         setpoint3 = 0.5
