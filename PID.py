@@ -82,14 +82,14 @@ def timerCallBack(event):
     if state == 'state1':
         yaw = getAngle(odom)
         scan_len = len(scan.ranges)
-        if yaw > 10:
-            
-            point = min(scan.ranges[scan_len-10 : scan_len+10])
+        
+        if (scan_len > 0):
+            point = min(scan.ranges)
             msg.angular.z = 0
             print ("point")
             print (point)
             #interpolando
-            setpoint2 = (200*((point - scan.ranges[scan_len-10])/(scan.ranges[scan_len+10] - scan.ranges[0]))) - 100
+            setpoint2 = (200*((point - scan.ranges[0])/(scan.ranges[scan_len-1] - scan.ranges[0]))) - 100
             print (setpoint2)
             error2 = (setpoint2 - yaw)
     
