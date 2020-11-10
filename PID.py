@@ -43,6 +43,7 @@ def scanCallBack(msg):
 
 # TIMER - Control Loop ----------------------------------------------
 def timerCallBack(event):
+    
     erro1=0
     I1=0
     I2=0
@@ -51,6 +52,7 @@ def timerCallBack(event):
     erro3=0
     state = 'state1'
     msg = Twist()
+    msg.angular.z = 2
     '''
     if state == 'initial':
         setpoint1 = 2.683991025         #,1.887759912) talvez seta um pouco pra tras de jeito
@@ -76,7 +78,7 @@ def timerCallBack(event):
         state = 'state1'
         
       '''  
-    msg.angular.z = 2
+    
     if state == 'state1':
         yaw = getAngle(odom)
         scan_len = len(scan.ranges)
