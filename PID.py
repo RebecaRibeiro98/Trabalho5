@@ -85,6 +85,7 @@ def timerCallBack(event):
         
         if (scan_len > 0):
             point = min(scan.ranges)
+            print (point)
             msg.angular.z = 0
             print ("point")
             print (point)
@@ -107,6 +108,7 @@ def timerCallBack(event):
         
         #else:
          #   control2 = 0
+        
         msg.angular.z = control2
         
         state = 'state2'
