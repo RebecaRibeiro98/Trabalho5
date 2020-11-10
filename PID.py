@@ -82,39 +82,45 @@ def timerCallBack(event):
     if state == 'state1':
         yaw = getAngle(odom)
         scan_len = len(scan.ranges)
-        print (yaw)
-        if (yaw>30):
-            point = min(scan.ranges)
-            print (point)
-            msg.angular.z = 0
-            print ("point")
-            print (point)
-            #interpolando
-            setpoint2 = (200*((point - scan.ranges[0])/(scan.ranges[scan_len-1] - scan.ranges[0]))) - 100
-            print (setpoint2)
-            error2 = (setpoint2 - yaw)
+        
+        for x in scan.ranges:
+            if ( x != min(scan.ranges)):
+                msg.angular.z = 1
+            else:
+                state = 'state2'
+                msg.angular.z = 0
+        
+        
+    if  (state == 'state2'): 
+        
+        point =  min(scan.ranges)
+        print ("point")
+        print (point)
+        #interpolando
+        setpoint2 = (200*((point - scan.ranges[0])/(scan.ranges[scan_len-1] - scan.ranges[0]))) - 100
+        print (setpoint2)
+        error2 = (setpoint2 - yaw)
     
-            if abs(error2) > 180:
-                if setpoint2 < 0:
-                    error2 += 360 
-                else:
-                    error2 -= 360
-            P2 = kp2*error2
-            I2 = (ki2*error2) + I2 #ki1*error1
-            D2 = kd2*(error2 - erro2)
-            control2 = P2+I2+D2
-            erro2 = error2 
-            msg.angular.z = control2
-        
-            state = 'state2'
+        if abs(error2) > 180:
+            if setpoint2 < 0:
+                error2 += 360 
+            else:
+                error2 -= 360
+        P2 = kp2*error2
+        I2 = (ki2*error2) + I2 #ki1*error1
+        D2 = kd2*(error2 - erro2)
+        control2 = P2+I2+D2
+        erro2 = error2 
+            
                     
-        
         #else:
-         #   control2 = 0
+            #control2 = 0
         
-       
+    msg.angular.z = control2
+        
+    state = 'state3'   
                     
-    if state == 'state2':
+    if state == 'state3':
         setpoint3 = 0.5
     
         scan_len = len(scan.ranges)
