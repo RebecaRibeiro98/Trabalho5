@@ -83,6 +83,7 @@ def timerCallBack(event):
             point = min (scan.ranges[scan_len-10 : scan_len+10]) 
             #interpolando
             setpoint2 = (200*((point - scan.ranges[0])/(scan.ranges[scan_len-1] - scan.ranges[0]))) - 100
+            print (setpoint2)
             error2 = (setpoint2 - yaw)
     
             if abs(error2) > 180:
