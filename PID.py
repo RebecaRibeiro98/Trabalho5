@@ -92,7 +92,7 @@ def timerCallBack(event):
                 else:
                     error2 -= 360
             P2 = kp2*error2
-            I2 = ki2*error2 + I2 #ki1*error1
+            I2 = (ki2*error2) + I2 #ki1*error1
             D2 = kd2*(error2 - erro2)
             control2 = P2+I2+D2
             erro2 = error2 
@@ -114,7 +114,7 @@ def timerCallBack(event):
             error3 = -(setpoint3 - read)
         
             P3 = kp3*error3
-            I3 = ki3*error3 + I3 #ki1*error1
+            I3 = (ki3*error3) + I3 #ki1*error1
             D3 = kd3*(error3 - erro3)
             control3 = P3+I3+D3
             erro3 = error3
