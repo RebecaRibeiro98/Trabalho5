@@ -76,7 +76,7 @@ def timerCallBack(event):
         state = 'state1'
         
       '''  
-    msg.angular.z = 1
+    msg.angular.z = 2
     if state == 'state1':
         yaw = getAngle(odom)
         scan_len = len(scan.ranges)
