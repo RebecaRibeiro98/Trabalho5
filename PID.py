@@ -82,7 +82,7 @@ def timerCallBack(event):
         print ("scan len")
         print (scan_len)
         if scan_len > 0:
-            point = min (scan.ranges[scan_len-10 : scan_len+10]) 
+            point = min(scan.ranges[scan_len-10 : scan_len+10])
             print ("point")
             print (point)
             print (scan.ranges[scan_len-10])
