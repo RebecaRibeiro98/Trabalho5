@@ -83,7 +83,7 @@ def timerCallBack(event):
         yaw = getAngle(odom)
         scan_len = len(scan.ranges)
         
-        if (scan_len > 0):
+        if (yaw>30):
             point = min(scan.ranges)
             print (point)
             msg.angular.z = 0
