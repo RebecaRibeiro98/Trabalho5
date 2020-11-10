@@ -80,13 +80,13 @@ def timerCallBack(event):
         yaw = getAngle(odom)
         scan_len = len(scan.ranges)
         if scan_len > 0:
-            msg.angular.z = 1
+            while (scan.ranges[scan_len-10 > 5]):
+                msg.angular.z = 1
+            
             point = min(scan.ranges[scan_len-10 : scan_len+10])
             msg.angular.z = 0
             print ("point")
             print (point)
-            print (scan.ranges[scan_len-10])
-            print (scan.ranges[scan_len+10])
             #interpolando
             setpoint2 = (200*((point - scan.ranges[scan_len-10])/(scan.ranges[scan_len+10] - scan.ranges[0]))) - 100
             print (setpoint2)
